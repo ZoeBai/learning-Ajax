@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta  http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>AJAX Demo</title>
+        <style>
+            body{
+                font-size: 18px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>员工查询</h1>
+        <label>请输入员工编号：</label>
+        <input type="text" id="keyword" />
+        <button id="search">查询</button>
+        <p id="searchResult"></p>
+
+        <h1>员工新建</h1>
+        <label>请输入员工编号：</label>
+        <input type="text" id="number" />
+        <br>
+        <label>请输入员工姓名：</label>
+        <input type="text" id="name" />
+        <br>
+        <label>请选择员工性别：</label>
+        <select id="sex">
+            <option value="男">男</option>
+            <option vlaue="女">女</option>
+        </select>
+        <br>
+        <label>请输入员工职位：</label>
+        <input type="text" id="job" />
+        <button id="save">保存</button>
+        <p id="createResult"></p>
+
+        <script>
+            document.getElementById("search").onclick = function(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "server.php?number=" + document.getElementById("keyword"));
+                xhr.send();
+                xhr.onreadystatuschange = function(){
+                    if(xhr.readystatus == 4){
+                        if(xhr.status == 200){
+                            var data = JSON.parse(xhr.responseText);
+                            if(data.success){
+                                document.getElementById("searchResult").innerText = data.msg;
+                            }else{
+                                document.getElementById("searchResult").innerText = "出现错误：" + data.msg;
+                            }                           
+                        }else{
+                            alert("发生错误" + xhr.status);
+                        }
+                    }
+                }
+            }
+
+            document.getElementById("save").onclick = function(){
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "server.php");
+                var data = "name=" + docunment.getElementById("name").value
+                            + "&number=" + document.getElementById("number").value
+                            + "&sex=" + document.getElementById("sex").value
+                            + "&job=" + document.getElementById("job").value;
+                xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                xhr.send(data);
+                xhr.onreadystatuschange = function(){
+                    if(xhr.readystatus == 4){
+                        if(xhr.status == 200){
+                            var response = JSON.parse(xhr.responseText);
+                            if(response.success){
+                                document.getElementById("createResult").innerText = response.msg;
+                            }else{
+                                document.getElementById("createResult").innerText = "出现错误：" + response.msg;
+                            }
+                        }else{
+                            alert("发现错误" + xhr.status);
+                        }
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>
