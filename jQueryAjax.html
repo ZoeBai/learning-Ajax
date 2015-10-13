@@ -39,7 +39,7 @@
             $("#search").click(function(){
                 $.ajax({
                     type: "GET",
-                    url: "server.php?number=" + document.getElementById("keyword"),
+                    url: "server.php?number=" + $("#keyword").val(),
                     dataType: "json",
                     success: function(data){
                         if(data.success){
