@@ -1,6 +1,8 @@
 <?php
     //set content-Type & charset
     header("Content-Type: application/json;charset=utf-8");
+    header("Access-Control-Allow-Origin: http://zoebai.github.io");
+    header("Access-Control-Allow-Methods:POST, GET");
     //"Content-Type: application/json || application/plain
     //               application/xml  || application/html  || application/javascript
 
