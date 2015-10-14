@@ -37,7 +37,7 @@
         <script>
             document.getElementById("search").onclick = function(){
                 var xhr = new XMLHttpRequest();
-                xhr.open("GET", "server.php?number=" + document.getElementById("keyword").value);
+                xhr.open("GET", "http://54.65.253.53/demo/CORS-XHR2-server.php?number=" + document.getElementById("keyword").value);
                 xhr.send();
                 xhr.onreadystatechange = function(){
                     if(xhr.readyState == 4){
@@ -57,7 +57,7 @@
 
             document.getElementById("save").onclick = function(){
                 var xhr = new XMLHttpRequest();
-                xhr.open("POST", "server.php");
+                xhr.open("POST", "http://54.65.253.53/demo/CORS-XHR2-server.php");
                 var data = "name=" + docunment.getElementById("name").value
                             + "&number=" + document.getElementById("number").value
                             + "&sex=" + document.getElementById("sex").value

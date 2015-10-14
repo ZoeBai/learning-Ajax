@@ -6,6 +6,8 @@
 
 * [ajax-with-json](http://54.65.253.53/demo/demo.html)
 * [ajax-with-jQuery](http://54.65.253.53/demo/jQueryAjax.html)
+* [cross-domain-jsonp](http://zoebai.github.io/learning-Ajax/cross-domain-jsonp.html)
+* [cross-domain-XHR2](http://zoebai.github.io/learning-Ajax/demo.html)
 
 ##学习资料
 
