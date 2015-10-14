@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta  http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <title>AJAX Demo</title>
+        <style>
+            body{
+                font-size: 18px;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>员工查询</h1>
+        <label>请输入员工编号：</label>
+        <input type="text" id="keyword" />
+        <button id="search">查询</button>
+        <p id="searchResult"></p>
+
+        <h1>员工新建</h1>
+        <label>请输入员工编号：</label>
+        <input type="text" id="number" />
+        <br>
+        <label>请输入员工姓名：</label>
+        <input type="text" id="name" />
+        <br>
+        <label>请选择员工性别：</label>
+        <select id="sex">
+            <option value="男">男</option>
+            <option vlaue="女">女</option>
+        </select>
+        <br>
+        <label>请输入员工职位：</label>
+        <input type="text" id="job" />
+        <button id="save">保存</button>
+        <p id="createResult"></p>
+        
+        <script src="http://apps.bdimg.com/libs/jquery/1.11.1/jquery.js"></script>
+        <script>
+            $("#search").click(function(){
+                $.ajax({
+                    type: "GET",
+                    url: "http://54.65.253.53/demo/serverjsonp.php?number=" + $("#keyword").val(),
+                    dataType: "jsonp",
+                    jsonp: "callback",
+                    success: function(data){
+                        if(data.success){
+                                $("#searchResult").text(data.msg);
+                            }else{
+                                $("#searchResult").text("出现错误：" + data.msg);
+                            }                           
+                    },
+                    error: function(jqXHR){
+                        alert("发生错误" + jqXHR.status);
+                    } 
+                });
+            });
+
+            $("#save").click(function(){
+                $.ajax({
+                    type: "POST",
+                    url: "http://54.65.253.53/demo/serverjsonp.php",
+                    data: {
+                        name: $("#name").val(),
+                        number: $("#number").val(),
+                        sex: $("#sex").val(),
+                        job: $("#job").val()
+                    },
+                    dataType: "json",
+                    success: function(data){
+                        if(data.success){
+                            $("#createResult").text(data.msg);
+                        }else{
+                            $("#createResult").text("出现错误：" + data.msg);
+                        }
+                    },
+                    error: function(jqXHR){
+                        alert("发生错误" + jqXHR.status);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
